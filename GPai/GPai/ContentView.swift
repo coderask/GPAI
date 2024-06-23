@@ -1,96 +1,118 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var freshmanCourses: String = ""
-    @State private var freshmanWeightedCourses: String = ""
-    @State private var freshmanGrades: Grades = Grades()
+    @State private var freshmanFirstSemGrades: Grades = Grades()
+    @State private var freshmanSecondSemGrades: Grades = Grades()
+    @State private var freshmanSummerGrades: Grades = Grades()
     
-    @State private var summerFreshmanCourses: String = ""
-    @State private var summerFreshmanWeightedCourses: String = ""
-    @State private var summerFreshmanGrades: Grades = Grades()
+    @State private var sophomoreFirstSemGrades: Grades = Grades()
+    @State private var sophomoreSecondSemGrades: Grades = Grades()
+    @State private var sophomoreSummerGrades: Grades = Grades()
     
-    @State private var sophomoreCourses: String = ""
-    @State private var sophomoreWeightedCourses: String = ""
-    @State private var sophomoreGrades: Grades = Grades()
+    @State private var juniorFirstSemGrades: Grades = Grades()
+    @State private var juniorSecondSemGrades: Grades = Grades()
+    @State private var juniorSummerGrades: Grades = Grades()
     
-    @State private var summerSophomoreCourses: String = ""
-    @State private var summerSophomoreWeightedCourses: String = ""
-    @State private var summerSophomoreGrades: Grades = Grades()
+    @State private var seniorFirstSemGrades: Grades = Grades()
+    @State private var seniorSecondSemGrades: Grades = Grades()
     
-    @State private var juniorCourses: String = ""
-    @State private var juniorWeightedCourses: String = ""
-    @State private var juniorGrades: Grades = Grades()
+    @State private var freshmanFirstSemAPs: String = ""
+    @State private var freshmanSecondSemAPs: String = ""
+    @State private var freshmanSummerAPs: String = ""
     
-    @State private var summerJuniorCourses: String = ""
-    @State private var summerJuniorWeightedCourses: String = ""
-    @State private var summerJuniorGrades: Grades = Grades()
+    @State private var sophomoreFirstSemAPs: String = ""
+    @State private var sophomoreSecondSemAPs: String = ""
+    @State private var sophomoreSummerAPs: String = ""
     
-    @State private var seniorCourses: String = ""
-    @State private var seniorWeightedCourses: String = ""
-    @State private var seniorGrades: Grades = Grades()
+    @State private var juniorFirstSemAPs: String = ""
+    @State private var juniorSecondSemAPs: String = ""
+    @State private var juniorSummerAPs: String = ""
+    
+    @State private var seniorFirstSemAPs: String = ""
+    @State private var seniorSecondSemAPs: String = ""
+    
+    @State private var cumulativeUnweightedGPA: Double? = nil
+    @State private var cumulativeWeightedGPA: Double? = nil
     
     var body: some View {
         NavigationView {
             Form {
-                Section(header: Text("Freshman Year")) {
-                    TextField("Number of Courses Taken", text: $freshmanCourses)
+                Section(header: Text("Freshman Year - First Semester")) {
+                    GradesInputView(grades: $freshmanFirstSemGrades)
+                    TextField("Number of AP/Honors Courses", text: $freshmanFirstSemAPs)
                         .keyboardType(.numberPad)
-                    TextField("Total Weighted Courses", text: $freshmanWeightedCourses)
+                }
+                
+                Section(header: Text("Freshman Year - Second Semester")) {
+                    GradesInputView(grades: $freshmanSecondSemGrades)
+                    TextField("Number of AP/Honors Courses", text: $freshmanSecondSemAPs)
                         .keyboardType(.numberPad)
-                    GradesInputView(grades: $freshmanGrades)
                 }
                 
                 Section(header: Text("Summer after Freshman Year")) {
-                    TextField("Number of Courses Taken", text: $summerFreshmanCourses)
+                    GradesInputView(grades: $freshmanSummerGrades)
+                    TextField("Number of AP/Honors Courses", text: $freshmanSummerAPs)
                         .keyboardType(.numberPad)
-                    TextField("Total Weighted Courses", text: $summerFreshmanWeightedCourses)
-                        .keyboardType(.numberPad)
-                    GradesInputView(grades: $summerFreshmanGrades)
                 }
                 
-                Section(header: Text("Sophomore Year")) {
-                    TextField("Number of Courses Taken", text: $sophomoreCourses)
+                Section(header: Text("Sophomore Year - First Semester")) {
+                    GradesInputView(grades: $sophomoreFirstSemGrades)
+                    TextField("Number of AP/Honors Courses", text: $sophomoreFirstSemAPs)
                         .keyboardType(.numberPad)
-                    TextField("Total Weighted Courses", text: $sophomoreWeightedCourses)
+                }
+                
+                Section(header: Text("Sophomore Year - Second Semester")) {
+                    GradesInputView(grades: $sophomoreSecondSemGrades)
+                    TextField("Number of AP/Honors Courses", text: $sophomoreSecondSemAPs)
                         .keyboardType(.numberPad)
-                    GradesInputView(grades: $sophomoreGrades)
                 }
                 
                 Section(header: Text("Summer after Sophomore Year")) {
-                    TextField("Number of Courses Taken", text: $summerSophomoreCourses)
+                    GradesInputView(grades: $sophomoreSummerGrades)
+                    TextField("Number of AP/Honors Courses", text: $sophomoreSummerAPs)
                         .keyboardType(.numberPad)
-                    TextField("Total Weighted Courses", text: $summerSophomoreWeightedCourses)
-                        .keyboardType(.numberPad)
-                    GradesInputView(grades: $summerSophomoreGrades)
                 }
                 
-                Section(header: Text("Junior Year")) {
-                    TextField("Number of Courses Taken", text: $juniorCourses)
+                Section(header: Text("Junior Year - First Semester")) {
+                    GradesInputView(grades: $juniorFirstSemGrades)
+                    TextField("Number of AP/Honors Courses", text: $juniorFirstSemAPs)
                         .keyboardType(.numberPad)
-                    TextField("Total Weighted Courses", text: $juniorWeightedCourses)
+                }
+                
+                Section(header: Text("Junior Year - Second Semester")) {
+                    GradesInputView(grades: $juniorSecondSemGrades)
+                    TextField("Number of AP/Honors Courses", text: $juniorSecondSemAPs)
                         .keyboardType(.numberPad)
-                    GradesInputView(grades: $juniorGrades)
                 }
                 
                 Section(header: Text("Summer after Junior Year")) {
-                    TextField("Number of Courses Taken", text: $summerJuniorCourses)
+                    GradesInputView(grades: $juniorSummerGrades)
+                    TextField("Number of AP/Honors Courses", text: $juniorSummerAPs)
                         .keyboardType(.numberPad)
-                    TextField("Total Weighted Courses", text: $summerJuniorWeightedCourses)
-                        .keyboardType(.numberPad)
-                    GradesInputView(grades: $summerJuniorGrades)
                 }
                 
-                Section(header: Text("Senior Year")) {
-                    TextField("Number of Courses Taken", text: $seniorCourses)
+                Section(header: Text("Senior Year - First Semester")) {
+                    GradesInputView(grades: $seniorFirstSemGrades)
+                    TextField("Number of AP/Honors Courses", text: $seniorFirstSemAPs)
                         .keyboardType(.numberPad)
-                    TextField("Total Weighted Courses", text: $seniorWeightedCourses)
+                }
+                
+                Section(header: Text("Senior Year - Second Semester")) {
+                    GradesInputView(grades: $seniorSecondSemGrades)
+                    TextField("Number of AP/Honors Courses", text: $seniorSecondSemAPs)
                         .keyboardType(.numberPad)
-                    GradesInputView(grades: $seniorGrades)
                 }
                 
                 Button(action: calculateGPA) {
                     Text("Calculate")
                         .frame(maxWidth: .infinity, alignment: .center)
+                }
+                
+                if let cumulativeUnweightedGPA = cumulativeUnweightedGPA, let cumulativeWeightedGPA = cumulativeWeightedGPA {
+                    Section(header: Text("Cumulative GPA")) {
+                        Text("Unweighted GPA: \(cumulativeUnweightedGPA, specifier: "%.2f")")
+                        Text("Weighted GPA: \(cumulativeWeightedGPA, specifier: "%.2f")")
+                    }
                 }
             }
             .navigationTitle("Course and Grades Input")
@@ -98,31 +120,19 @@ struct ContentView: View {
     }
     
     func calculateGPA() {
-        // Create an instance of gpacalc and call the appropriate method
         let gpaCalculator = GPACalculator()
-        gpaCalculator.calculate(
-            freshmanCourses: freshmanCourses,
-            freshmanWeightedCourses: freshmanWeightedCourses,
-            freshmanGrades: freshmanGrades,
-            summerFreshmanCourses: summerFreshmanCourses,
-            summerFreshmanWeightedCourses: summerFreshmanWeightedCourses,
-            summerFreshmanGrades: summerFreshmanGrades,
-            sophomoreCourses: sophomoreCourses,
-            sophomoreWeightedCourses: sophomoreWeightedCourses,
-            sophomoreGrades: sophomoreGrades,
-            summerSophomoreCourses: summerSophomoreCourses,
-            summerSophomoreWeightedCourses: summerSophomoreWeightedCourses,
-            summerSophomoreGrades: summerSophomoreGrades,
-            juniorCourses: juniorCourses,
-            juniorWeightedCourses: juniorWeightedCourses,
-            juniorGrades: juniorGrades,
-            summerJuniorCourses: summerJuniorCourses,
-            summerJuniorWeightedCourses: summerJuniorWeightedCourses,
-            summerJuniorGrades: summerJuniorGrades,
-            seniorCourses: seniorCourses,
-            seniorWeightedCourses: seniorWeightedCourses,
-            seniorGrades: seniorGrades
+        let results = gpaCalculator.calculate(
+            freshmanFirstSemGrades: freshmanFirstSemGrades, freshmanSecondSemGrades: freshmanSecondSemGrades, freshmanSummerGrades: freshmanSummerGrades,
+            sophomoreFirstSemGrades: sophomoreFirstSemGrades, sophomoreSecondSemGrades: sophomoreSecondSemGrades, sophomoreSummerGrades: sophomoreSummerGrades,
+            juniorFirstSemGrades: juniorFirstSemGrades, juniorSecondSemGrades: juniorSecondSemGrades, juniorSummerGrades: juniorSummerGrades,
+            seniorFirstSemGrades: seniorFirstSemGrades, seniorSecondSemGrades: seniorSecondSemGrades,
+            freshmanFirstSemAPs: freshmanFirstSemAPs, freshmanSecondSemAPs: freshmanSecondSemAPs, freshmanSummerAPs: freshmanSummerAPs,
+            sophomoreFirstSemAPs: sophomoreFirstSemAPs, sophomoreSecondSemAPs: sophomoreSecondSemAPs, sophomoreSummerAPs: sophomoreSummerAPs,
+            juniorFirstSemAPs: juniorFirstSemAPs, juniorSecondSemAPs: juniorSecondSemAPs, juniorSummerAPs: juniorSummerAPs,
+            seniorFirstSemAPs: seniorFirstSemAPs, seniorSecondSemAPs: seniorSecondSemAPs
         )
+        cumulativeUnweightedGPA = results.cumulativeUnweightedGPA
+        cumulativeWeightedGPA = results.cumulativeWeightedGPA
     }
 }
 
@@ -147,33 +157,8 @@ struct GradesInputView: View {
     }
 }
 
-struct Grades {
-    var As: String = ""
-    var Bs: String = ""
-    var Cs: String = ""
-    var Ds: String = ""
-    var Fs: String = ""
-}
-
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
     }
 }
-
-// Assuming gpacalc.swift contains the following code
-class GPACalculator {
-    func calculate(
-        freshmanCourses: String, freshmanWeightedCourses: String, freshmanGrades: Grades,
-        summerFreshmanCourses: String, summerFreshmanWeightedCourses: String, summerFreshmanGrades: Grades,
-        sophomoreCourses: String, sophomoreWeightedCourses: String, sophomoreGrades: Grades,
-        summerSophomoreCourses: String, summerSophomoreWeightedCourses: String, summerSophomoreGrades: Grades,
-        juniorCourses: String, juniorWeightedCourses: String, juniorGrades: Grades,
-        summerJuniorCourses: String, summerJuniorWeightedCourses: String, summerJuniorGrades: Grades,
-        seniorCourses: String, seniorWeightedCourses: String, seniorGrades: Grades
-    ) {
-        // Your GPA calculation logic goes here
-        
-    }
-}
-
