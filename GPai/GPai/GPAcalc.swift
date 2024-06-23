@@ -24,7 +24,6 @@ class GPACalculator {
         juniorFirstSemAPs: String, juniorSecondSemAPs: String, juniorSummerAPs: String,
         seniorFirstSemAPs: String, seniorSecondSemAPs: String
     ) -> GPAResults {
-        // Combine all grades and APs into arrays for easier processing
         let allGrades = [
             freshmanFirstSemGrades, freshmanSecondSemGrades, freshmanSummerGrades,
             sophomoreFirstSemGrades, sophomoreSecondSemGrades, sophomoreSummerGrades,
