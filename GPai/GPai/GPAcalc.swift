@@ -61,8 +61,7 @@ class GPACalculator {
         let totalGradePoints = (totalAs * 4) + (totalBs * 3) + (totalCs * 2) + (totalDs * 1)
         let unweightedGPA = Double(totalGradePoints) / Double(totalGrades)
         
-        let totalWeightedPoints = (totalAs * 5) + (totalBs * 4) + (totalCs * 3) + (totalDs * 2) + (totalFs * 0)
-        let weightedGPA = Double(totalWeightedPoints + apCourses) / Double(totalGrades)
+        let weightedGPA = Double(totalGradePoints + apCourses) / Double(totalGrades)
         
         return GPAResults(
             cumulativeUnweightedGPA: unweightedGPA,
